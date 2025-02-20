@@ -60,7 +60,7 @@ class CategoryProvider extends ChangeNotifier {
             'Error: ${response.body?['message'] ?? response.statusText}');
       }
     } catch (e) {
-      print(e);
+      log(e.toString());
       SnackBarHelper.showErrorSnackBar('An error occurred: $e');
       rethrow;
     }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import 'core/data/data_provider.dart';
 import 'core/routes/app_pages.dart';
@@ -22,6 +23,9 @@ import 'utility/extensions.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  OneSignal.initialize("6d887551-08fd-4822-ae83-b882fa76001f");
+  OneSignal.Notifications.requestPermission(true);
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (context) => DataProvider(),

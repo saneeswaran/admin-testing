@@ -63,12 +63,16 @@ DataRow posterDataRow(Poster poster, {Function? edit, Function? delete}) {
         Row(
           children: [
             Image.network(
-              poster.imageUrl == null ? '' : '$MAIN_URL${poster.imageUrl}',
+              poster.imageUrl != null && poster.imageUrl!.isNotEmpty
+                  ? '$MAIN_URL${poster.imageUrl}' // ✅ Ensure FULL URL
+                  : 'https://via.placeholder.com/150', // 🔥 Use placeholder for missing images
               height: 30,
               width: 30,
               errorBuilder: (BuildContext context, Object exception,
                   StackTrace? stackTrace) {
-                return Icon(Icons.error);
+                print(
+                    'Image Load Error: ${poster.imageUrl}'); // 🔥 Debugging log
+                return Icon(Icons.error, color: Colors.red);
               },
             ),
             Padding(
